@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
+    <environment name="production">
+        <!-- on production, the spring active profile is 'prod' -->
+        <sysprop name="spring.profiles.active" value="production" />
+    </environment>
+    <!-- default spring active profile is 'default' -->
+    <sysprop name="spring.profiles.active" value="development" />
+    <sysprop name="org.owasp.esapi.resources" value="staxcat/install/webapp.war/WEB-INF/esapi" />
+</cloudbees-web-app>

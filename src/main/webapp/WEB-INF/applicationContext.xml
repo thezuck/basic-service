@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	   		http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+	<!-- NOTE: there can be only ONE of these, so all properties should be defined there (including multiple files if needed) -->
+	<context:property-placeholder
+		properties-ref="deployProperties" />
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered 
+		as Spring beans. For example @Controller and @Service. Make sure to set the 
+		correct base-package -->
+	<context:component-scan base-package="com.basicservice" />
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming 
+		model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.basicservice.dto.conversionFactories.StringToValidatedStringConverterFactory"/>
+            </set>
+        </property>
+        <property name="formatters">
+            <set>
+            </set>
+        </property>
+        <property name="formatterRegistrars">
+            <set>
+            </set>
+        </property>
+    </bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	</bean>
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	        <property name="paramName" value="lang" />
+	    </bean>
+	</mvc:interceptors>
+	<!-- Configures Handler Interceptors --> 
+	<mvc:interceptors>  
+	 <mvc:interceptor>
+		  <mvc:mapping path="/home"/>
+		  <bean class="com.basicservice.service.RequestInitializeInterceptor" />
+	 </mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- Imports datasource configuration -->
+	<import resource="spring-data.xml" />
+
+	<beans profile="development">
+		<bean id="deployProperties"
+			class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		    <property name="locations">
+		        <list>
+		            <value>/WEB-INF/development.spring.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+
+	<beans profile="production">
+		<bean id="deployProperties"
+			class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		    <property name="locations">
+		        <list>
+		            <value>/WEB-INF/production.spring.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+	
+	<beans>
+		<bean class="com.basicservice.service.MailService" id="mailService">
+		    <property name="smtpHost" value="${SENDGRID_SMTP_HOST}" />
+		    <property name="sendGridUsername" value="${SENDGRID_USERNAME}" />
+		    <property name="sendGridPassword" value="${SENDGRID_PASSWORD}" />
+		</bean>	
+	</beans>
+
+	<beans>
+		<bean id="tilesConfigurer"
+			class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+			<property name="definitions">
+				<list>
+					<value>/WEB-INF/tiles/defs/general.xml</value>
+					<!--value>/WEB-INF/tiles/defs/widgets.xml</value-->
+					<!--value>/WEB-INF/tiles/defs/administrator.xml</value-->
+					<!--value>/WEB-INF/tiles/defs/customer.xml</value-->
+					<!--value>/WEB-INF/tiles/defs/templates.xml</value-->
+				</list>
+			</property>
+		</bean>
+	</beans>
+	<!-- I18n & L10n -->
+	<beans>
+		<bean id="messageSource"
+		    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		    <property name="basenames">
+		    <list>
+				<value>/WEB-INF/i18n/messages</value>
+				<value>/WEB-INF/i18n/common</value>
+			</list>
+		    </property>
+		    <property name="defaultEncoding" value="UTF-8"/>
+		</bean>
+		<bean id="localeChangeInterceptor"
+		    class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		    <property name="paramName" value="lang" />
+		</bean>
+		 
+		<bean id="localeResolver"
+		    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		    <property name="defaultLocale" value="en"/>
+		</bean>
+		 
+		<bean id="handlerMapping"
+		    class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		    <property name="interceptors">
+		        <ref bean="localeChangeInterceptor" />
+		    </property>
+		</bean>
+		
+	</beans>
+</beans>

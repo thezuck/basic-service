@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC       
+                "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"       
+                "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="base.container" template="/WEB-INF/tiles/layouts/maincontainer.jsp">
+		<put-attribute name="title" value="Basic Service" />
+		<put-attribute name="header" value="/WEB-INF/tiles/layouts/header.jsp" />
+		<put-attribute name="country_selection" value="/WEB-INF/jsp/common_fragments/countrySelection_fragment.jsp" cascade="true"/>
+		<put-attribute name="body" value="/WEB-INF/tiles/layouts/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/layouts/footer.jsp" />
+	</definition>
+
+	<definition name="basicservice.home" extends="base.container">
+		<put-attribute name="active_menu_item" value="HOME" cascade="true"/>
+		<put-attribute name="title" value="My Basic Service"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/home_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="home.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.admin" extends="base.container">
+		<put-attribute name="active_menu_item" value="ADMIN"  cascade="true"/>
+		<put-attribute name="title" value="Administration"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/admin_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="admin.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.contact" extends="base.container">
+		<put-attribute name="active_menu_item" value="CONTACT"  cascade="true"/>
+		<put-attribute name="title" value="Contact Us"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/contact_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="contact.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.termsofservice" extends="base.container">
+		<put-attribute name="active_menu_item" value="NONE"  cascade="true"/>
+		<put-attribute name="title" value="Basic Service - Terms of service"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/termsofservice_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="empty.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.privacypolicy" extends="base.container">
+		<put-attribute name="active_menu_item" value="NONE"  cascade="true"/>
+		<put-attribute name="title" value="Basic Service - Privacy Policy"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/privacypolicy_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="empty.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.dmca" extends="base.container">
+		<put-attribute name="active_menu_item" value="NONE"  cascade="true"/>
+		<put-attribute name="title" value="Basic Service - Digital Millennium Copyright Act Policy"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/dmca_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="empty.css" cascade="true"/>
+	</definition>
+
+	<definition name="basicservice.about" extends="base.container">
+		<put-attribute name="active_menu_item" value="ABOUT"  cascade="true"/>
+		<put-attribute name="title" value="About Basic Service"  cascade="true"/>
+		<put-attribute name="central_strip" value="/WEB-INF/jsp/about_fragment.jsp" cascade="true"/>
+		<put-attribute name="cssDefinitionsFile" value="empty.css" cascade="true"/>
+	</definition>
+</tiles-definitions>
