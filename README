@@ -1,2 +1,25 @@
-Repository basic-service
+This basic service uses the following technologies:
+spring
+jsp/tiles 2
+jquery
+jqueryui
+cloudbees
+mongodb
+sendgrid
+ajax
+
+And can do the following:
+Show a couple of web pages which have no real content BUT:
+1. Lets you register and login
+2. Send confirmation email to confirm registration
+3. Select a language (English/Hebrew) and display accordingly (meaning right-to-left and left-to-right behavior is handled, email is sent in the right language)
+4. Lets you display configurable dialogs and act according to dialog result
+5. Uses spring and tiles2 and lets you manage jsp fragments to have unified page visuals
+6. Uses ESAPI for input validation and intrusion detection
+7. Saves and gets objects to/from mongodb, while preserving a stateless service which can grow indefinitely
+8. More inside
+
+I'll work to add more (for example, unit testing is not done yet), but this should be a giant leap for anyone starting from scratch.
+
+Enjoy!
 
