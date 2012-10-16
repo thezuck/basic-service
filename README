@@ -1,6 +1,6 @@
 This basic service uses the following technologies:
 spring
-jsp/tiles 2
+jsp/tiles 2+jstl
 jquery
 jqueryui
 cloudbees
