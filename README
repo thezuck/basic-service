@@ -16,7 +16,7 @@ Show a couple of web pages which have no real content BUT:
 3. Select a language (English/Hebrew) and display accordingly (meaning right-to-left and left-to-right behavior is handled, email is sent in the right language)
 4. Lets you display configurable dialogs and act according to dialog result
 5. Uses spring and tiles2 and lets you manage jsp fragments to have unified page visuals
-6. Uses ESAPI for input validation and intrusion detection
+6. Uses ESAPI for input validation and intrusion detection, and has CSRF protection built in
 7. Saves and gets objects to/from mongodb, while preserving a stateless service which can grow indefinitely
 8. More inside
 
